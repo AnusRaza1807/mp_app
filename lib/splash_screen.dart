@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mp_app/Format/Text_Design.dart';
+
 import 'package:mp_app/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -26,17 +28,19 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              "Welcome To Attendance App",
-              style: TextStyle(
-                  color: Color(0XFF071952),
-                  fontSize: 20,
-                  fontWeight: FontWeight.w900),
-            ),
+            // const Text(
+            //   "Welcome To Attendance App",
+            //   style: TextStyle(
+            //       color: Color(0XFF071952),
+            //       fontSize: 20,
+            //       fontWeight: FontWeight.w900),
+            // ),
+            const Text_Heading(Text_Head: "Welcome Back to Mobile App"),
             Container(
               height: 300,
               width: 300,
