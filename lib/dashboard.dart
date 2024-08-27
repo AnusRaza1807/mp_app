@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mp_app/Format/Text_Design.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:intl/intl.dart';
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -28,6 +28,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffEBF4F6),
       appBar: AppBar(
           title: Text(
             'Hi! Good Morning $_fullName',
@@ -68,8 +69,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 height: 50,
                 width: 300,
                 decoration: BoxDecoration(
-                  border: Border(),
-                  color: Color(0xFF37B7C3),
+                  border: Border.all(
+                    width: 5,
+                    color: Color(0XFF071952),
+                  ),
+                  color: Colors.transparent,
                   borderRadius: BorderRadius.all(Radius.circular(25)),
                 ),
               ),
@@ -78,7 +82,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        backgroundColor: Color(0XFF071952),
+        child: Icon(Icons.add, color: Color(0xFF37B7C3)),
         onPressed: () {
           showModalBottomSheet(
             context: context,
@@ -99,7 +104,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           child: TextField(
                             controller: _addTask,
                             decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.person_2_sharp),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(20),
@@ -113,14 +117,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             ElevatedButton(
-                              child: Text("Add Task"),
+                              child: Text_Title(Title_Text: "Add Task"),
                               style: ElevatedButton.styleFrom(
-                                  backgroundColor: Color(0XFF071952)),
+                                  backgroundColor: Color(0xFF37B7C3)),
                               onPressed: () {
                                 setState(() {
                                   _taskList.add(_addTask.text);
                                 });
-
+                                Navigator.pop(context);
                                 Future.delayed(Duration(seconds: 1), () {
                                   _addTask.clear();
                                 });
