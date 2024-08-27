@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/intl.dart';
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -56,7 +57,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 height: 05,
               ),
               Container(
-                child: Center(child: Text(_addTask.text)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ListText(
+                      task: _taskList[index],
+                    ),
+                  ],
+                ),
                 height: 50,
                 width: 300,
                 decoration: BoxDecoration(
@@ -80,31 +88,30 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: SizedBox(
-                  height: 200,
+                  height: 150,
                   child: Container(
                     width: 500,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            //SizedBox(height: 20),
-                            Container(
-                              width: 300,
-                              child: TextField(
-                                controller: _addTask,
-                                decoration: InputDecoration(
-                                  prefixIcon: Icon(Icons.person_2_sharp),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(20),
-                                    ),
-                                  ),
-                                  labelText: 'Task Assign',
+                        Container(
+                          width: 250,
+                          child: TextField(
+                            controller: _addTask,
+                            decoration: InputDecoration(
+                              prefixIcon: Icon(Icons.person_2_sharp),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(20),
                                 ),
                               ),
+                              labelText: 'Task Assign',
                             ),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
                             ElevatedButton(
                               child: Text("Add Task"),
                               style: ElevatedButton.styleFrom(
@@ -117,6 +124,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 Future.delayed(Duration(seconds: 1), () {
                                   _addTask.clear();
                                 });
+                                print(_taskList);
                               },
                             ),
                           ],
@@ -130,6 +138,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
           );
         },
       ),
+    );
+  }
+}
+
+class ListText extends StatelessWidget {
+  // ignore: unused_field
+  final String task;
+  const ListText({super.key, required this.task});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      task,
     );
   }
 }
