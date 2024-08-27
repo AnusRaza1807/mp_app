@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:mp_app/Format/Text_Design.dart';
+import 'package:mp_app/dashboard.dart';
 import 'package:mp_app/signup_screen.dart';
 import 'package:mp_app/Format/format_design.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController _userNameController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,6 +39,7 @@ class LoginScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextField(
+                      controller: _userNameController,
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.person_2_sharp),
                         border: OutlineInputBorder(
@@ -43,9 +53,10 @@ class LoginScreen extends StatelessWidget {
                       height: 25,
                     ),
                     TextField(
+                      controller: _passwordController,
                       obscureText: true,
                       decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.admin_panel_settings_sharp),
+                        prefixIcon: Icon(Icons.lock_person_sharp),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(
                           Radius.circular(20),
@@ -60,7 +71,27 @@ class LoginScreen extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Color(0XFF071952),
                           fixedSize: Size(300, 50)),
-                      onPressed: () {},
+                      onPressed: () async {
+                        final prefs = await SharedPreferences.getInstance();
+                        String? savedUserName = prefs.getString('userName');
+                        String? savedPassword = prefs.getString('password');
+
+                        if (_userNameController.text == savedUserName &&
+                            _passwordController.text == savedPassword) {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DashboardScreen(),
+                            ),
+                          );
+                        } else {
+                          // Show an error message
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                                content: Text('Invalid username or password')),
+                          );
+                        }
+                      },
                       child: Text("Login",
                           style: TextStyle(color: Color(0XFFEBF4F6))),
                     ),

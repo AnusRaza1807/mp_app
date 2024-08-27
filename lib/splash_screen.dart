@@ -14,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 8), _routPage);
+    Future.delayed(const Duration(seconds: 5), _routPage);
   }
 
   void _routPage() {
@@ -40,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
             //       fontSize: 20,
             //       fontWeight: FontWeight.w900),
             // ),
-            const Text_Heading(Text_Head: "Welcome Back to Mobile App"),
+            Text_Heading(Text_Head: "Welcome Back!"),
             Container(
               height: 300,
               width: 300,
